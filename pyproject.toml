@@ -1,5 +1,5 @@
 [project]
-name = "zouhar-metriclearner"
+name = "zouhar_embedding"
 version = "0.0.0"
 dependencies = [
     "torch",
