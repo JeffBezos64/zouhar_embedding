@@ -33,7 +33,7 @@ class RNNMetricLearner(torch.nn.Module):
 
         # TODO: contrastive learning
         self.loss = torch.nn.MSELoss()
-        self.panphon_distance = Dict()
+        self.panphon_distance = dict()
         self.optimizer = torch.optim.Adam(self.parameters(), lr=1e-2)
 
         if target_metric == "l2":
@@ -43,7 +43,8 @@ class RNNMetricLearner(torch.nn.Module):
         else:
             raise Exception(f"Unknown metric {target_metric}")
 
-        self.evaluator = Evaluator(safe_eval=safe_eval)
+        #commented out as a test on the 5/03/24
+        #self.evaluator = Evaluator(safe_eval=safe_eval)
 
         # move the model to GPU
         self.to(device)
@@ -75,6 +76,7 @@ class RNNVocab():
 
     def onehot_encode(self, sample=None):
         """takes a dict of words and returns their one hot encoding for the model"""
+        #take feature size from here return[0][0].shape[1]
         return [(self.token_onehot(x["token_ort"]), x["token_ipa"]) for x in sample]
 
     

@@ -7,7 +7,8 @@ dependencies = [
     "scikit-learn",
     "numpy",
     "transformers",
-    "datasets"
+    "datasets",
+    "tqdm"
 ]
 classifiers = [
     "Private :: Do Not Upload",
