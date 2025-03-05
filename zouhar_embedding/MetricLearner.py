@@ -73,6 +73,10 @@ class RNNVocab():
         indices = [self.vocab[c] for c in word if c in self.vocab]
         return F.one_hot(torch.tensor(indices), num_classes=self.vocab_size).float()
 
+    def onehot_encode(self, sample=None):
+        """takes a dict of words and returns their one hot encoding for the model"""
+        return [(self.token_onehot(x["token_ort"]), x["token_ipa"]) for x in sample]
+
     
     def get_vocab_size(self):
         self.vocab_size = len(self.vocab)
