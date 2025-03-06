@@ -2,5 +2,6 @@ zouhar_embedding.egg-info/
 test-venv/
 __pycache__/
 zouhar_embedding/__pycache__/*
+vocab/*
 *.pyc
 *.pyo

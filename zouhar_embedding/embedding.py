@@ -43,3 +43,22 @@ class ZouharEmbedder():
                 self.model.forward(batch).detach().cpu().numpy()
             )
         return data_out
+
+    def vec(self, word):
+        if type(word) != 'str':
+            raise TypeError('this function takes a single word in the form of a str')
+        tmp = []
+        tmp.append(word)
+        words = tmp
+        words = [[word, None] for word in words]
+        a = ["token_ort", "token_ipa"]
+        x = [dict(zip(a,word)) for word in words]
+        word = self.vocab.onehot_encode(x)
+        BATCH_SIZE = 1
+        data_out = []
+        for i in tqdm.tqdm(range(math.ceil(len(word) / BATCH_SIZE))):
+            batch = [f for f, _ in word[i * BATCH_SIZE:(i + 1) * BATCH_SIZE]]
+            data_out += list(
+                self.model.forward(batch).detach().cpu().numpy()
+            )
+        return data_out
