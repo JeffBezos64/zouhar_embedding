@@ -30,16 +30,12 @@ class ZouharEmbedder():
     #     print(word)
     #     return list(self.model.forward(word).detach().cpu().numpy())
     
-    def embed_word(self, word):
-        x = {}
-        x["token_ort"] = word
-        x["token_ipa"] = None
-        x_list = []
-        x_list.append(x)
-        print(x_list)
-        word = self.vocab.onehot_encode(x_list)
-        print(word)
-        BATCH_SIZE = 32
+    def embed_list(self, words):
+        words = [[word, None] for word in words]
+        a = ["token_ort", "token_ipa"]
+        x = [dict(zip(a,word)) for word in words]
+        word = self.vocab.onehot_encode(x)
+        BATCH_SIZE = 256
         data_out = []
         for i in tqdm.tqdm(range(math.ceil(len(word) / BATCH_SIZE))):
             batch = [f for f, _ in word[i * BATCH_SIZE:(i + 1) * BATCH_SIZE]]
@@ -47,6 +43,3 @@ class ZouharEmbedder():
                 self.model.forward(batch).detach().cpu().numpy()
             )
         return data_out
-
-    def embed_list(self, word_list):
-        pass 
