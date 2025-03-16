@@ -45,7 +45,7 @@ class ZouharEmbedder():
         return data_out
 
     def vec(self, word):
-        if type(word) != 'str':
+        if type(word) != type('str'):
             raise TypeError('this function takes a single word in the form of a str')
         tmp = []
         tmp.append(word)
