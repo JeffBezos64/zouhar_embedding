@@ -56,9 +56,10 @@ class ZouharEmbedder():
         word = self.vocab.onehot_encode(x)
         BATCH_SIZE = 1
         data_out = []
-        for i in tqdm.tqdm(range(math.ceil(len(word) / BATCH_SIZE))):
+        for i in range(math.ceil(len(word) / BATCH_SIZE)):
             batch = [f for f, _ in word[i * BATCH_SIZE:(i + 1) * BATCH_SIZE]]
             data_out += list(
                 self.model.forward(batch).detach().cpu().numpy()
             )
+        data_out = data_out.pop() #This is because we want only the vector and not the batch_list of length 1
         return data_out
