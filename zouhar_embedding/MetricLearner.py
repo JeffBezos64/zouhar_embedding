@@ -93,7 +93,7 @@ class RNNVocab():
 
     
     def get_multi_data(self, purpose_key="main"):
-        data = datasets.load_dataset("json", data_files="vocab/train.jsonl",split="train")
+        data = datasets.load_dataset("json", data_files="/csse/research/NativeLanguageID/mthesis-phonological/zouhar-embedding-project/vocab/train.jsonl",split="train")
         self.data = data
 
     def __str__(self):
